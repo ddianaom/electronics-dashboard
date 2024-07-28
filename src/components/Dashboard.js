@@ -37,8 +37,8 @@ const Dashboard = () => {
                         {
                             label: 'Quantidade de GPUs',
                             data: gpuValues,
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                            borderColor: 'rgba(75, 192, 192, 1)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
                             borderWidth: 1
                         }
                     ]
@@ -63,8 +63,8 @@ const Dashboard = () => {
                         {
                             label: 'Quantidade de CPUs',
                             data: cpuValues,
-                            backgroundColor: 'rgba(153, 102, 255, 0.2)',
-                            borderColor: 'rgba(153, 102, 255, 1)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
                             borderWidth: 1
                         }
                     ]
@@ -89,8 +89,8 @@ const Dashboard = () => {
                         {
                             label: 'Quantidade de Placas Mães',
                             data: motherboardValues,
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                            borderColor: 'rgba(255, 159, 64, 1)',
+                            backgroundColor: 'rgba(255, 206, 86, 0.2)',
+                            borderColor: 'rgba(255, 206, 86, 1)',
                             borderWidth: 1
                         }
                     ]
@@ -118,77 +118,83 @@ const Dashboard = () => {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-            <div style={{ width: '500px', height: '400px' }}>
-                <h2>Estoque de GPUs</h2>
-                <Bar
-                    data={barDataGPU}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', width: '100%' }}>
+                <div style={{ width: '500px', height: '400px' }}>
+                    <h2>Estoque de Placas Mães</h2>
+                    <Bar
+                        data={barDataMotherboard}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Estoque de Placas Mães',
+                                },
                             },
-                            title: {
-                                display: true,
-                                text: 'Estoque de GPUs',
-                            },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </div>
+                <div style={{ width: '100%', maxWidth: '500px', height: 'auto', maxHeight: '300px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+    <h2>Distribuição de Componentes</h2>
+    <Pie
+        data={pieData}
+        options={{
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Distribuição dos Tipos de Componentes',
+                },
+            },
+        }}
+    />
+</div>
+
+
             </div>
-            <div style={{ width: '500px', height: '400px' }}>
-                <h2>Estoque de CPUs</h2>
-                <Bar
-                    data={barDataCPU}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', width: '100%' }}>
+                <div style={{ width: '500px', height: '400px' }}>
+                    <h2>Estoque de GPUs</h2>
+                    <Bar
+                        data={barDataGPU}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Estoque de GPUs',
+                                },
                             },
-                            title: {
-                                display: true,
-                                text: 'Estoque de CPUs',
+                        }}
+                    />
+                </div>
+                <div style={{ width: '500px', height: '400px' }}>
+                    <h2>Estoque de CPUs</h2>
+                    <Bar
+                        data={barDataCPU}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Estoque de CPUs',
+                                },
                             },
-                        },
-                    }}
-                />
-            </div>
-            <div style={{ width: '500px', height: '400px' }}>
-                <h2>Estoque de Placas Mães</h2>
-                <Bar
-                    data={barDataMotherboard}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            title: {
-                                display: true,
-                                text: 'Estoque de Placas Mães',
-                            },
-                        },
-                    }}
-                />
-            </div>
-            <div style={{ width: '500px', height: '400px', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <h2>Distribuição de Componentes</h2>
-                <Pie
-                    data={pieData}
-                    options={{
-                        responsive: true,
-                        plugins: {
-                            legend: {
-                                position: 'top',
-                            },
-                            title: {
-                                display: true,
-                                text: 'Distribuição dos Tipos de Componentes',
-                            },
-                        },
-                    }}
-                />
+                        }}
+                    />
+                </div>
             </div>
         </div>
     );
