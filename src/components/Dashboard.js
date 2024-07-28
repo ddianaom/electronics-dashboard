@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js';
+import '../index.css'
 
-// Registering components for ChartJS
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement);
+
+const components_max_number = 10000
 
 const Dashboard = () => {
     const [barDataGPU, setBarDataGPU] = useState({ labels: [], datasets: [] });
@@ -12,11 +14,10 @@ const Dashboard = () => {
     const [pieData, setPieData] = useState({ labels: [], datasets: [] });
 
     useEffect(() => {
-        // Fetching data from JSONPlaceholder
+        // Requisição à API JSONPlaceholder
         fetch('https://jsonplaceholder.typicode.com/todos')
             .then(response => response.json())
             .then(json => {
-                // Processing data for GPU bar chart
                 const gpuNames = [
                     'NVIDIA GeForce RTX 3090',
                     'AMD Radeon RX 6900 XT',
@@ -29,7 +30,7 @@ const Dashboard = () => {
                     'NVIDIA GeForce GTX 1660 Ti',
                     'AMD Radeon RX 5500 XT'
                 ];
-                const gpuValues = gpuNames.map(() => Math.floor(Math.random() * 100));
+                const gpuValues = gpuNames.map(() => Math.floor(Math.random() * components_max_number));
 
                 setBarDataGPU({
                     labels: gpuNames,
@@ -44,7 +45,6 @@ const Dashboard = () => {
                     ]
                 });
 
-                // Processing data for CPU bar chart
                 const cpuNames = [
                     'Intel Core i9',
                     'AMD Ryzen 9',
@@ -55,7 +55,7 @@ const Dashboard = () => {
                     'Intel Core i3',
                     'AMD Ryzen 3'
                 ];
-                const cpuValues = cpuNames.map(() => Math.floor(Math.random() * 100));
+                const cpuValues = cpuNames.map(() => Math.floor(Math.random() * components_max_number));
 
                 setBarDataCPU({
                     labels: cpuNames,
@@ -70,7 +70,6 @@ const Dashboard = () => {
                     ]
                 });
 
-                // Processing data for Motherboard bar chart
                 const motherboardNames = [
                     'ASUS ROG Crosshair',
                     'MSI MEG X570',
@@ -81,7 +80,7 @@ const Dashboard = () => {
                     'Gigabyte B550 AORUS',
                     'ASRock B550 Steel Legend'
                 ];
-                const motherboardValues = motherboardNames.map(() => Math.floor(Math.random() * 100));
+                const motherboardValues = motherboardNames.map(() => Math.floor(Math.random() * components_max_number));
 
                 setBarDataMotherboard({
                     labels: motherboardNames,
@@ -96,9 +95,8 @@ const Dashboard = () => {
                     ]
                 });
 
-                // Processing data for pie chart
                 const pieLabels = ['GPU', 'CPU', 'Placa Mãe'];
-                const pieValues = pieLabels.map(() => Math.floor(Math.random() * 100));
+                const pieValues = pieLabels.map(() => Math.floor(Math.random() * components_max_number));
 
                 setPieData({
                     labels: pieLabels,
@@ -117,9 +115,9 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', width: '100%' }}>
-                <div style={{ width: '500px', height: '400px' }}>
+        <div className="dashboard-container">
+            <div className="dashboard-row">
+                <div className="chart-container">
                     <h2>Estoque de Placas Mães</h2>
                     <Bar
                         data={barDataMotherboard}
@@ -137,29 +135,27 @@ const Dashboard = () => {
                         }}
                     />
                 </div>
-                <div style={{ width: '100%', maxWidth: '500px', height: 'auto', maxHeight: '300px', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <h2>Distribuição de Componentes</h2>
-    <Pie
-        data={pieData}
-        options={{
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Distribuição dos Tipos de Componentes',
-                },
-            },
-        }}
-    />
-</div>
-
-
+                <div className="pie-chart-container">
+                    <h2>Distribuição de Componentes</h2>
+                    <Pie
+                        data={pieData}
+                        options={{
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Distribuição da Quantidade de Componentes no Estoque',
+                                },
+                            },
+                        }}
+                    />
+                </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '20px', width: '100%' }}>
-                <div style={{ width: '500px', height: '400px' }}>
+            <div className="dashboard-row">
+                <div className="chart-container">
                     <h2>Estoque de GPUs</h2>
                     <Bar
                         data={barDataGPU}
@@ -177,7 +173,7 @@ const Dashboard = () => {
                         }}
                     />
                 </div>
-                <div style={{ width: '500px', height: '400px' }}>
+                <div className="chart-container">
                     <h2>Estoque de CPUs</h2>
                     <Bar
                         data={barDataCPU}
