@@ -6,3 +6,10 @@
 h2 {
   color: #333;
 }
+
+.pie-chart-container {
+  width: 200px;
+  height: 200px;
+  justify-content: center;
+}
+
